@@ -80,17 +80,33 @@ class PostsController extends AbstractController
 
     public function modify(int $id, Request $request, EntityManagerInterface $em, PostsRepository $postRepo, MembersRepository $memberRepo): Response
     {
-        $isMember = str_contains($request->getPathInfo(), '/membermodify/');
+        $path = $request->getPathInfo();
+        $isMember = str_contains($path, '/admin/modify/membres/');
         
-        if ($isMember) {
+        $routeName = $request->attributes->get('_route');
+        $memberRoutes = ['membermodify'];
+        $postRoutes = ['postmodify'];
+
+        if (in_array($routeName, $memberRoutes)) {
             $entity = $memberRepo->find($id);
             $formType = MembersType::class;
-        } else {
+            $entityType = 'member';
+        } elseif (in_array($routeName, $postRoutes)) {
             $entity = $postRepo->find($id);
             $formType = PostsType::class;
+            $entityType = 'post';
+        } else {
+            throw new \Exception('Unknown route type');
         }
 
         if (!$entity) {
+            dump(
+                "ID: $id",
+                "Type: " . ($isMember ? 'Member' : 'Post'),
+                "Member exists: " . ($memberRepo->find($id) ? 'Yes' : 'No'),
+                "Post exists: " . ($postRepo->find($id) ? 'Yes' : 'No')
+            );
+            die;
             throw $this->createNotFoundException('Entry not found');
         }
 
@@ -109,7 +125,9 @@ class PostsController extends AbstractController
             'form' => $form->createView(),
             'entity' => $entity,
             'is_edit' => true,
-            'is_member' => $isMember
+            'is_member' => $isMember,
+            'entityType' => $entityType,
+            'entityId' => $id,
         ]);
     }
 

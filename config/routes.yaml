@@ -158,7 +158,7 @@ postdelete:
   methods: [POST]
 
 memberdelete:
-  path: /admin/delete/{id}
+  path: /admin/member/delete/{id}
   controller: App\Controller:\PostsController::delete
   methods: [POST]
 

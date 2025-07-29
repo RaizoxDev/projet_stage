@@ -1,16 +1,9 @@
-{% if form.grade is defined %}
-    {{ form_row(form.grade) }}
-{% endif %}
+{{ form_row(form.grade) }}
 
-{% if form.branch is defined %}
-    {{ form_row(form.branch) }}
-{% endif %}
+{{ form_row(form.branch) }}
 
-{% if form.name is defined %}
-    {{ form_row(form.name) }}
-{% endif %}
+{{ form_row(form.name) }}
 
-{% if form.job is defined %}
-    {{ form_row(form.job) }}
-{% endif %}
+{{ form_row(form.job) }}
 
+{{ form_rest(form) }}

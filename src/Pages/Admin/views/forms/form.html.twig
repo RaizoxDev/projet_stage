@@ -14,29 +14,17 @@
 
 	<h1 class="align">{{ is_edit ? 'Modifier un post' : 'Ajouter un post' }}</h1>
 
-	{% if is_edit and entity is defined %}
-		<div class="align">
-			{% if is_member %}
-				<h2>{{ entity.name }}</h2>
-				<p>{{ entity.description }}</p>
-			{% else %}
-				<h2>{{ entity.name }}</h2>
-				<p>{{ entity.description }}</p>
-				<p>{{ entity.download }}</p>
-				<img src="/uploads/images/{{ entity.image }}">
-			{% endif %}
-		</div>
-	{% endif %}
-
 	<div class="form-container align">
 		{{ form_start(form, {
-        'attr': {
-            'enctype': 'multipart/form-data',
-            'id': 'dynamic-form'
-        }
-    }) }}
+        	'attr': {
+            	'enctype': 'multipart/form-data',
+            	'id': 'dynamic-form'
+        	}
+    	}) }}
 
-		{{ form_row(form.page) }}
+		{% if form.page is defined %}
+        	{{ form_row(form.page) }}
+    	{% endif %}
 
 		<div id="dynamic-fields">
     		{% if form.membre is defined %}
@@ -44,22 +32,17 @@
     		{% else %}
         		{% include '@admin/forms/regularform.html.twig' with {'form': form} %}
     		{% endif %}
-			{{ form_errors(form) }}
 		</div>
 
 		<button type="submit">{{ is_edit ? 'Modifier' : 'Ajouter' }}</button>
 
-		{{ form_end(form) }}
 	</div>
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
     		const pageSelect = document.querySelector('#posts_page');
-    		const dynamicFields = document.getElementById('dynamic-fields');
+			if (!pageSelect) return;
 
-			if (!pageSelect) {
-				console.warn('Le champ de sélection de page est introuvable.');
-				return;
-			}
+    		const dynamicFields = document.getElementById('dynamic-fields');
 
 			if (pageSelect.value) {
 				updateFormFields(pageSelect.value);
@@ -72,7 +55,7 @@
 			function updateFormFields(page) {
 				dynamicFields.innerHTML = '<p>Chargement...</p>';
 				
-				fetch(/form/data?type=${entityType}&id=${entityId})
+				fetch(`/form/data?type={{ entityType }}&id={{ entityId }}`)
 					.then(response => {
 						if (!response.ok) {
 							throw new Error('Network response was not ok');
