@@ -3,3 +3,306 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+accueil:
+  path: /accueil/{id}
+  controller: App\Pages\Accueil\AccueilController::index
+  defaults:
+    id: null
+  requirements:
+    id: \d+
+  methods: [GET]
+
+adhesion:
+  path: /adhesion
+  controller: App\Pages\Association\Adhésion\AdhésionController::index
+  methods: [GET]
+
+membres:
+  path: /membres
+  controller: App\Pages\Association\Membres\MembresController::index
+  methods: [GET]
+
+alsh:
+  path: /alsh
+  controller: App\Pages\Enfance\ALSH\ALSHController::index
+  methods: [GET]
+
+tap:
+  path: /tap
+  controller: App\Pages\Enfance\TAP\TAPController::index
+  methods: [GET]
+
+AaDE:
+  path: /aide/enfance
+  controller: App\Pages\Enfance\Aide_aux_Devoirs\Aide_aux_DevoirsEController::index
+  methods: [GET]
+
+tickets:
+  path: /tickets
+  controller: App\Pages\Jeunesse\Tickets_Sport\Tickets_SportController::index
+  methods: [GET]
+
+projets:
+  path: /projets
+  controller: App\Pages\Jeunesse\Projets_Jeunes\ProjetsJeunesController::index
+  methods: [GET]
+
+AaDJ:
+  path: /aide/jeunesse
+  controller: App\Pages\Jeunesse\Aide_aux_Devoirs\Aide_aux_DevoirsJController::index
+  methods: [GET]
+
+collège:
+  path: /college
+  controller: App\Pages\Jeunesse\Collège\CollègeController::index
+  methods: [GET]
+
+info:
+  path: /info
+  controller: App\Pages\Jeunesse\Info_Jeunes\Info_JeunesController::index
+  methods: [GET]
+
+séjours:
+  path: /sejours
+  controller: App\Pages\Jeunesse\Séjours\SéjoursController::index
+  methods: [GET]
+
+parentalité:
+  path: /parentalite
+  controller: App\Pages\Adultes_Familles\Parentalité\ParentalitéController::index
+  methods: [GET]
+
+tempsforts:
+  path: /tempsforts
+  controller: App\Pages\Adultes_Familles\Temps_Forts\Temps_FortsController::index
+  methods: [GET]
+
+théâtre:
+  path: /ateliers/theatre
+  controller: App\Pages\Adultes_Familles\Ateliers\Atelier_Théâtre\Atelier_ThéâtreController::index
+  methods: [GET]
+
+loisirs:
+  path: /ateliers/loisirs
+  controller: App\Pages\Adultes_Familles\Ateliers\Loisirs_Créatifs\Loisirs_CréatifsController::index
+  methods: [GET]
+
+franceservices:
+  path: /franceservices
+  controller: App\Pages\Accompagnement\France_Services\France_ServicesController::index
+  methods: [GET]
+
+emploi:
+  path: /emploi
+  controller: App\Pages\Accompagnement\Emploi\EmploiController::index
+  methods: [GET]
+
+cyberbase:
+  path: /cyberbase
+  controller: App\Pages\Accompagnement\Cyber_Base\CyberBaseController::index
+  methods: [GET]
+
+services:
+  path: /services
+  controller: App\Pages\Accompagnement\Services_Départementaux\Services_DépartementauxController::index
+  methods: [GET]
+
+partenaires:
+  path: /partenaires
+  controller: App\Pages\Partenaires\PartenairesController::index
+  methods: [GET]
+
+téléchargements:
+  path: /telechargements
+  controller: App\Pages\Téléchargements\TéléchargementsController::index
+  methods: [GET]
+
+admin:
+  path: /admin
+  controller: App\Pages\Admin\AdminController::index
+  methods: [GET]
+
+login:
+  path: /login
+  controller: App\Pages\Admin\SecurityController::login
+  methods: [GET, POST]
+
+logout:
+  path: /logout
+  controller: App\Pages\Admin\SecurityController::logout
+  methods: [GET]
+
+admin_security_routes:
+  resource: '../src/Pages/Admin/'
+  type: attribute
+
+add:
+  path: /admin/add
+  controller: App\Controller\PostsController::add
+  methods: [GET, POST]
+
+postmodify:
+  path: /admin/post/modify/{id}
+  controller: App\Controller\PostsController::modify
+  methods: [GET, POST]
+
+membermodify:
+  path: /admin/member/modify/{id}
+  controller: App\Controller\PostsController::modify
+  methods: [GET, POST]
+
+postdelete:
+  path: /admin/delete/{id}
+  controller: App\Controller\PostsController::delete
+  methods: [POST]
+
+memberdelete:
+  path: /admin/delete/{id}
+  controller: App\Controller:\PostsController::delete
+  methods: [POST]
+
+membersform:
+    path: /form/members
+    controller: App\Controller\PostsController::ajaxForm
+    methods: [GET]
+
+modifylist:
+  path: /admin/modify/list
+  controller: App\Pages\Admin\ModifyController::index
+  methods: [GET]
+
+modifyaccueil:
+  path: /admin/modify/accueil
+  controller: App\Pages\Admin\ModifyController::accueil
+  methods: [GET]
+
+modifyassociation:
+  path: /admin/modify/association
+  controller: App\Pages\Admin\ModifyController::association
+  methods: [GET]
+
+modifyenfance:
+  path: /admin/modify/enfance
+  controller: App\Pages\Admin\ModifyController::enfance
+  methods: [GET]
+
+modifyjeunesse:
+  path: /admin/modify/jeunesse
+  controller: App\Pages\Admin\ModifyController::jeunesse
+  methods: [GET]
+
+modifyfamille:
+  path: /admin/modify/famille
+  controller: App\Pages\Admin\ModifyController::famille
+  methods: [GET]
+
+modifyaccompagnement:
+  path: /admin/modify/accompagement
+  controller: App\Pages\Admin\ModifyController::accompagnement
+  methods: [GET]
+
+modifypartenaires:
+  path: /admin/modify/partenaires
+  controller: App\Pages\Admin\ModifyController::partenaires
+  methods: [GET]
+
+modifytéléchargements:
+  path: /admin/modify/telechargements
+  controller: App\Pages\Admin\ModifyController::téléchargements
+  methods: [GET]
+
+modifyadhesion:
+  path: /admin/modify/adhesion
+  controller: App\Pages\Admin\ModifyController::adhesion
+  methods: [GET]
+
+modifymembres:
+  path: /admin/modify/membres
+  controller: App\Pages\Admin\ModifyController::membres
+  methods: [GET]
+
+modifyalsh:
+  path: /admin/modify/alsh
+  controller: App\Pages\Admin\ModifyController::alsh
+  methods: [GET]
+
+modifytap:
+  path: /admin/modify/tap
+  controller: App\Pages\Admin\ModifyController::tap
+  methods: [GET]
+
+modifyaade:
+  path: /admin/modify/aade
+  controller: App\Pages\Admin\ModifyController::aade
+  methods: [GET]
+
+modifytickets:
+  path: /admin/modify/tickets
+  controller: App\Pages\Admin\ModifyController::tickets
+  methods: [GET]
+
+modifyprojets:
+  path: /admin/modify/projets
+  controller: App\Pages\Admin\ModifyController::projets
+  methods: [GET]
+
+modifyaadj:
+  path: /admin/modify/aadj
+  controller: App\Pages\Admin\ModifyController::aadj
+  methods: [GET]
+
+modifyij:
+  path: /admin/modify/ij
+  controller: App\Pages\Admin\ModifyController::ij
+  methods: [GET]
+
+modifycollege:
+  path: /admin/modify/college
+  controller: App\Pages\Admin\ModifyController::college
+  methods: [GET]
+
+modifysejours:
+  path: /admin/modify/sejours
+  controller: App\Pages\Admin\ModifyController::sejours
+  methods: [GET]
+
+modifytheatre:
+  path: /admin/modify/theatre
+  controller: App\Pages\Admin\ModifyController::theatre
+  methods: [GET]
+
+modifyloisirs:
+  path: /admin/modify/loisirs
+  controller: App\Pages\Admin\ModifyController::loisirs
+  methods: [GET]
+
+modifyparentalite:
+  path: /admin/modify/parentalite
+  controller: App\Pages\Admin\ModifyController::parentalite
+  methods: [GET]
+
+modifytempsforts:
+  path: /admin/modify/tempsforts
+  controller: App\Pages\Admin\ModifyController::tempsforts
+  methods: [GET]
+
+modifyfranceservices:
+  path: /admin/modify/franceservices
+  controller: App\Pages\Admin\ModifyController::franceservices
+  methods: [GET]
+
+modifyemploi:
+  path: /admin/modify/emploi
+  controller: App\Pages\Admin\ModifyController::emploi
+  methods: [GET]
+
+modifycyberbase:
+  path: /admin/modify/cyberbase
+  controller: App\Pages\Admin\ModifyController::cyberbase
+  methods: [GET]
+
+modifyservices:
+  path: /admin/modify/services
+  controller: App\Pages\Admin\ModifyController::services
+  methods: [GET]

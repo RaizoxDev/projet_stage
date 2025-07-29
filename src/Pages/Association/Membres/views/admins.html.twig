@@ -1,0 +1,25 @@
+<div class="white-color blue-outline">
+	<span class="blue-color title-test">Composition du Conseil d'Administration</span>
+	<div class="flex">
+		<div class="custom-column col-12 col-md-6 col-lg-6 mb-3 align">
+			<span class="admin-title">Les Membres du Bureau</span>
+			<p class="admin-name custom-column align">
+			{% for member in members %}
+				{% if member.branch == 'mb' %}
+					<span>{{ member.name }}</span>
+				{% endif %}
+			{% endfor %}
+			</p>
+		</div>
+		<div class="custom-column col-12 col-md-6 col-lg-6 mb-3 align">
+			<span class="admin-title">Les Autres Membres du CA</span>
+			<p class="admin-name custom-column align">
+				{% for member in members %}
+					{% if member.branch == 'ca' %}
+						<span>{{ member.name }}</span>
+					{% endif %}
+				{% endfor %}
+			</p>
+		</div>
+	</div>
+</div>

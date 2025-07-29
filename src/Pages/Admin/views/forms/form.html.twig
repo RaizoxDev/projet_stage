@@ -1,0 +1,122 @@
+<title>{% block title %}Espace Administrateur - Ajout de Données{% endblock %}</title>
+{% block body %}
+	<div class="align">
+		<button class="add">
+			<a class="clean-text" href="/admin/add">Ajouter</a>
+		</button>
+		<button class="modify">
+			<a class="clean-text" href="/admin/modify/list">Modifier</a>
+		</button>
+		<button class="delete">
+			<a class="clean-text" href="/admin/modify/list">Supprimer</a>
+		</button>
+	</div>
+
+	<h1 class="align">{{ is_edit ? 'Modifier un post' : 'Ajouter un post' }}</h1>
+
+	{% if is_edit and entity is defined %}
+		<div class="align">
+			{% if is_member %}
+				<h2>{{ entity.name }}</h2>
+				<p>{{ entity.description }}</p>
+			{% else %}
+				<h2>{{ entity.name }}</h2>
+				<p>{{ entity.description }}</p>
+				<p>{{ entity.download }}</p>
+				<img src="/uploads/images/{{ entity.image }}">
+			{% endif %}
+		</div>
+	{% endif %}
+
+	<div class="form-container align">
+		{{ form_start(form, {
+        'attr': {
+            'enctype': 'multipart/form-data',
+            'id': 'dynamic-form'
+        }
+    }) }}
+
+		{{ form_row(form.page) }}
+
+		<div id="dynamic-fields">
+    		{% if form.membre is defined %}
+        		{% include '@admin/forms/membersform.html.twig' with {'form': form.membre} %}
+    		{% else %}
+        		{% include '@admin/forms/regularform.html.twig' with {'form': form} %}
+    		{% endif %}
+			{{ form_errors(form) }}
+		</div>
+
+		<button type="submit">{{ is_edit ? 'Modifier' : 'Ajouter' }}</button>
+
+		{{ form_end(form) }}
+	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+    		const pageSelect = document.querySelector('#posts_page');
+    		const dynamicFields = document.getElementById('dynamic-fields');
+
+			if (!pageSelect) {
+				console.warn('Le champ de sélection de page est introuvable.');
+				return;
+			}
+
+			if (pageSelect.value) {
+				updateFormFields(pageSelect.value);
+			}
+
+			pageSelect.addEventListener('change', function() {
+				updateFormFields(this.value);
+			});
+
+			function updateFormFields(page) {
+				dynamicFields.innerHTML = '<p>Chargement...</p>';
+				
+				fetch(`/form/members?page=${page}`)
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok');
+						}
+						return response.json();
+					})
+					.then(data => {
+						dynamicFields.innerHTML = data.html;
+						setupRoleBranchLogic();
+					})
+					.catch(error => {
+						console.error('Fetch error:', error);
+						dynamicFields.innerHTML = `<p>Erreur: ${error.message}</p>`;
+					});
+			}
+
+			function setupRoleBranchLogic() {
+				const branchField = document.querySelector('[name$="[membre][branch]"]');
+				if (!branchField) return;
+
+				const roleMap = JSON.parse(branchField.dataset.roleMap || '{}');
+				const allOptions = Array.from(branchField.options).filter(opt => opt.value);
+
+				document.querySelector('[name$="[membre][grade]"]')?.addEventListener('change', function() {
+					const selectedRole = this.value;
+					const allowedBranches = roleMap[selectedRole] || [];
+
+					branchField.innerHTML = '';
+					const placeholder = document.createElement('option');
+					placeholder.value = '';
+					placeholder.textContent = "Choisir une branche d'activité";
+					branchField.appendChild(placeholder);
+
+					allOptions.forEach(option => {
+						if (allowedBranches.includes(option.value)) {
+							branchField.appendChild(option.cloneNode(true));
+						}
+					});
+				});
+			}
+		});
+	</script>
+	{% block importmap %}
+		{{ importmap('app') }}
+		{% block stylesheets %}{% endblock %}
+	{% endblock %}
+{% endblock %}

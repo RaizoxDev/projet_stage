@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<title>{% block title %}Tickets Sports{% endblock %}</title>
+
+    <div class="container-fluid yellow-color blue-outline">
+        <p class="custom-column">
+            <span>
+                Les Tickets Sports et Culture sont des activités mises en place par le secteur Jeunesse à destination des 11-18 ans.
+                Chaque petites vacances et l’été au mois de juillet, les animateurs concoctent un programme alléchant : activités et sorties sportives et/ou culturelles ainsi que découverte de nouvelles pratiques.
+            </span>
+            <div class="flex d-flex align">
+                <img class="img-alsh" src="/images/images-plaquette/JEU_sortir.webp"/>
+                <img class="img-alsh" src="/images/images-plaquette/JEU_découverte.webp"/>
+            </div>
+        </p>
+        <p class="custom-column">
+            <span>Inscription :</span>
+            <span>♦ Ne pas oublier avant toute activité</span>
+            <br>
+            <span>Tarification</span>
+            <span>♦ La cotisation Tickets Sports et Culture est valable du 1er septembre au 31 août de l’année suivante, elle permet de pouvoir accéder à toutes les activités.</span>
+        </p>
+    </div>
+
+{% endblock %}

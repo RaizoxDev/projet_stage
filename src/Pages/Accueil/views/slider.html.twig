@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<div class="swiper">
+    <div class="swiper-wrapper">
+        {% for post in posts %}
+            {% if post.page == 'accueil' %}
+                <div class="swiper-slide">
+                    <div class="post-card align">
+                        <h2>{{ post.name }}</h2>
+                        <div class="align">
+                            {% if post.image %}
+                                <img src="{{ asset('uploads/images/' ~ post.image) }}" alt="Image non trouvée">
+                            {% endif %}
+                        </div>
+                        
+                        <p>{{ post.description|slice(0, 150) ~ '...' }}</p>
+                        {% if post.download %}
+                            <a href="{{ post.download }}" class="btn" target="_blank">Télécharger</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper('.swiper', {
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            768: {
+                slidesPerView: 2,
+            },
+            1024: {
+                slidesPerView: 3,
+            }
+        }
+    });
+</script>

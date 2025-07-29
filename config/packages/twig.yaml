@@ -1,0 +1,33 @@
+twig:
+    file_name_pattern: '*.twig'
+    globals:
+        app: '@router'
+    paths:
+        '%kernel.project_dir%/src/Pages/Accueil/views': accueil
+        '%kernel.project_dir%/src/Pages/Association/Adhésion/views': adhésion
+        '%kernel.project_dir%/src/Pages/Adultes_Familles/Parentalité/views': parentalité
+        '%kernel.project_dir%/src/Pages/Adultes_Familles/Temps_Forts/views': TF
+        '%kernel.project_dir%/src/Pages/Adultes_Familles/Ateliers/Atelier_Théâtre/views': AT
+        '%kernel.project_dir%/src/Pages/Adultes_Familles/Ateliers/Loisirs_Créatifs/views': LC
+        '%kernel.project_dir%/src/Pages/Accompagnement/Cyber_Base/views': CB
+        '%kernel.project_dir%/src/Pages/Accompagnement/Emploi/views': emploi
+        '%kernel.project_dir%/src/Pages/Accompagnement/France_Services/views': FS
+        '%kernel.project_dir%/src/Pages/Accompagnement/Services_Départementaux/views': SD
+        '%kernel.project_dir%/src/Pages/Enfance/ALSH/views': ALSH
+        '%kernel.project_dir%/src/Pages/Enfance/TAP/views': TAP
+        '%kernel.project_dir%/src/Pages/Enfance/Aide_aux_Devoirs/views': AaDE
+        '%kernel.project_dir%/src/Pages/Jeunesse/Tickets_Sport/views': TS
+        '%kernel.project_dir%/src/Pages/Jeunesse/Projets_Jeunes/views': PJ
+        '%kernel.project_dir%/src/Pages/Jeunesse/Collège/views': collège
+        '%kernel.project_dir%/src/Pages/Jeunesse/Info_Jeunes/views': IJ
+        '%kernel.project_dir%/src/Pages/Jeunesse/Séjours/views': séjours
+        '%kernel.project_dir%/src/Pages/Jeunesse/Aide_aux_Devoirs/views': AaDJ
+        '%kernel.project_dir%/src/Pages/Association/Membres/views': membres
+        '%kernel.project_dir%/src/Pages/Partenaires/views': partenaires
+        '%kernel.project_dir%/src/Pages/Téléchargements/views': téléchargements
+        '%kernel.project_dir%/src/Pages/Admin/views': admin
+        '%kernel.project_dir%/views': views
+        '%kernel.project_dir%/templates': templates
+when@test:
+    twig:
+        strict_variables: true

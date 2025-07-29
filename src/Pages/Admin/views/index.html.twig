@@ -1,0 +1,24 @@
+<title>{% block title %}Espace Administrateur{% endblock %}</title>
+{% block body %}
+	<div class="align">
+		<h1>Bienvenue dans l'interface Administrateur.</h1>
+	</div>
+	<div class="align">
+		<p class="choice">Que souhaitez-vous faire ?</p>
+	</div>
+	<div class="flex align">
+		<button class="add">
+			<a class="clean-text" href="/admin/add">Ajouter</a>
+		</button>
+		<button class="modify">
+			<a class="clean-text" href="/admin/modify/list">Modifier</a>
+		</button>
+		<button class="delete">
+			<a class="clean-text" href="/admin/modify/list">Supprimer</a>
+		</button>
+	</div>
+	{% block importmap %}
+		{{ importmap('app') }}
+		{% block stylesheets %}{% endblock %}
+	{% endblock %}
+{% endblock %}

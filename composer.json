@@ -7,14 +7,39 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "doctrine/doctrine-bundle": "*",
+        "doctrine/doctrine-fixtures-bundle": "*",
+        "doctrine/doctrine-migrations-bundle": "*",
+        "doctrine/orm": "*",
+        "fakerphp/faker": "*",
+        "guzzlehttp/psr7": "*",
+        "http-interop/response-sender": "*",
+        "laminas/laminas-diactoros": "*",
+        "laminas/laminas-http": "*",
+        "laminas/laminas-router": "*",
+        "mezzio/mezzio-fastroute": "*",
+        "pagerfanta/pagerfanta": "*",
+        "robmorgan/phinx": "*",
+        "symfony/asset": "7.3.*",
+        "symfony/asset-mapper": "7.3.*",
         "symfony/console": "7.3.*",
+        "symfony/doctrine-messenger": "7.3.*",
         "symfony/dotenv": "7.3.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "7.3.*",
+        "symfony/http-client": "7.3.*",
+        "symfony/mailer": "7.3.*",
+        "symfony/mime": "7.3.*",
         "symfony/runtime": "7.3.*",
-        "symfony/yaml": "7.3.*"
-    },
-    "require-dev": {
+        "symfony/security-bundle": "7.3.*",
+        "symfony/twig-bridge": "7.3.*",
+        "symfony/twig-bundle": "7.3.*",
+        "symfony/twig-pack": "*",
+        "symfony/webapp-pack": "*",
+        "symfony/yaml": "7.3.*",
+        "symfonycasts/verify-email-bundle": "*",
+        "twig/extra-bundle": "*",
+        "twig/twig": "*"
     },
     "config": {
         "allow-plugins": {
@@ -27,7 +52,9 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "App\\Framework\\": "src/Framework/",
+            "App\\Pages\\": "src/Pages/"
         }
     },
     "autoload-dev": {
@@ -48,7 +75,8 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "importmap:install": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
@@ -63,7 +91,11 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.3.*"
+            "require": "7.3.*",
+            "docker": false
         }
+    },
+    "require-dev": {
+        "icanhazstring/composer-unused": "*"
     }
 }

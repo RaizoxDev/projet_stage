@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<title>{% block title %}Temps Forts{% endblock %}</title>
+
+    <div class="white-color yellow-outline d-flex justify-content-center custom-column">
+        <div class="flex">
+            <p class="custom-column text-temps-forts">
+                <span class="yellow-text">La Disco Soupe</span>
+                <span>Les bénévoles épluchent et cuisinent des légumes invendus offerts par nos maraîchers locaux pour lutter contre le gaspillage alimentaire.</span>
+                <span>En exterieur, la distribution se fait dans une ambiance festive et chaleureuse au profit du village de l'AFM Téléthon.</span>
+            </p>
+            <img class="img-tf" src="/images/images-plaquette/Photo_Disco_Soupe.jpg">
+        </div>
+        <div class="flex">
+            <img class="img-tf" src="/images/images-plaquette/radio.JPG"/>
+            <p class="custom-column text-temps-forts">
+                <span class="yellow-text">Semaine Radio - Champchamp FM</span>
+                <span>Sur les ondes de "Radio Francas", une semaine d'émition radiophonique qui offre un espace d'expression pour les acteurs de la vie locale:<br/> école, collège, mairie, associations...</span>
+                <span>Vous pouvez retrouver toutes les émitions sur le blog: <a href="https://champchampfm.blogspot.com">champchampfm.blogspot.com</a></span>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}

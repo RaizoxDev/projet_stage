@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<title>{% block title %}Séjours{% endblock %}</title>
+
+    <div class="yellow-color blue-outline">
+        <p class="custom-column d-flex align">
+            <span>Séjours organisés par le centre social (départ en Juillet) pour les 11/15 ans:</span>
+            <span>Des réunions sont prévues pendant les vacances de Février et d'Avril pour s'appuyer sur les envies et les proposition des jeunes pour contruire le séjour.</span>
+            <div class="flex d-flex align">
+                <img class="img-séjours" src="/images/images-plaquette/JEU_activite_plein_nature.webp"/>
+                <img class="img-séjours" src="/images/images-plaquette/JEU_découvrir.webp"/>
+            </div>
+        </p>
+        <p class="custom-column d-flex align">
+            <span>Séjours acompagnés par le CAS JCL:</span>
+            <span>Un group de jeunes se mobilise tout au long de l'année pour organiser et financer ses propres vacances.</span>
+            <span>Un animateur accompagne le groupe dans son projet et ses démarches.</span>
+            <div class="flex d-flex align">
+                <img class="img-séjours" src="/images/images-plaquette/séjours_enfance.jpg"/>
+                <img class="img-séjours" src="/images/images-plaquette/Sejours_jeunes.JPG"/>
+            </div>
+        </p>
+    </div>
+
+{% endblock %}

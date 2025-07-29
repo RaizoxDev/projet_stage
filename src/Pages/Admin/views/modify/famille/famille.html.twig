@@ -1,0 +1,42 @@
+{% block body %}
+	<title>
+		{% block title %}Espace Administrateur - Modification Famille/Vie Sociale
+		{% endblock %}
+	</title>
+
+	<div class="flex align">
+		<button class="add">
+			<a class="clean-text" href="/admin/add">Ajouter</a>
+		</button>
+		<button class="modify">
+			<a class="clean-text" href="/admin/modify/list">Modifier</a>
+		</button>
+		<button class="delete">
+			<a class="clean-text" href="/admin/modify/list">Supprimer</a>
+		</button>
+	</div>
+
+	<div class="modify-list">
+		<div class="flex align">
+			<button class="modify">
+				<a class="clean-text" href="/admin/modify/theatre">Atelier Théâtre</a>
+			</button>
+			<button class="modify">
+				<a class="clean-text" href="/admin/modify/loisirs">Atelier Loisirs Créatifs</a>
+			</button>
+		</div>
+		<div class="flex align">
+			<button class="modify">
+				<a class="clean-text" href="/admin/modify/parentalite">Parentalité</a>
+			</button>
+			<button>
+				<a class="clean-text" href="/admin/modify/tempsforts">Temps Forts</a>
+			</button>
+		</div>
+	</div>
+
+	{% block importmap %}
+		{{ importmap('app') }}
+		{% block stylesheets %}{% endblock %}
+	{% endblock %}
+{% endblock %}

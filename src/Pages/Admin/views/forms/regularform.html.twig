@@ -1,0 +1,12 @@
+{% if form.name is defined %}
+    {{ form_row(form.name) }}
+{% endif %}
+{% if form.description is defined %}
+    {{ form_row(form.description) }}
+{% endif %}
+{% if form.download is defined %}
+    {{ form_row(form.download) }}
+{% endif %}
+{% if form.image is defined %}
+    {{ form_row(form.image) }}
+{% endif %}

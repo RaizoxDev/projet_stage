@@ -1,0 +1,47 @@
+{% block body %}
+	<title>
+		{% block title %}Espace Administrateur - Modification Jeunesse{% endblock %}
+	</title>
+
+	<div class="flex align">
+		<button class="add">
+			<a class="clean-text" href="/admin/add">Ajouter</a>
+		</button>
+		<button class="modify">
+			<a class="clean-text" href="/admin/modify/list">Modifier</a>
+		</button>
+		<button class="delete">
+			<a class="clean-text" href="/admin/modify/list">Supprimer</a>
+		</button>
+	</div>
+
+	<div class="flex align">
+		<div class="modify-list">
+			<button class="modify">
+				<a class="clean-text" href="/admin/modify/tickets">Tickets Sports</a>
+			</button>
+			<button class="modify">
+				<a class="clean-text" href="/admin/modify/projets">Projets Jeunes</a>
+			</button>
+			<button class="modify">
+				<a class="clean-text" href="/admin/modify/aadj">Aide aux Devoirs</a>
+			</button>
+		</div>
+        <div class="modify-list">
+            <button class="modify">
+				<a class="clean-text" href="/admin/modify/ij">Info Jeunes</a>
+			</button>
+			<button class="modify">
+				<a class="clean-text" href="/admin/modify/college">Collège</a>
+			</button>
+			<button class="modify">
+				<a class="clean-text" href="/admin/modify/sejours">Séjours</a>
+			</button>
+        </div>
+	</div>
+
+	{% block importmap %}
+		{{ importmap('app') }}
+		{% block stylesheets %}{% endblock %}
+	{% endblock %}
+{% endblock %}

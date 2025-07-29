@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<title>{% block title %}France Services{% endblock %}</title>
+
+	<div class="white-color yellow-outline">
+		<div class="custom-column d-flex align">
+			<p>Un accueil individualisé pour vous aiderr dans vos démarches administratives</p>
+			<p>Le CAS JCL est labélisé France Services avec plusieurs conseillers, disponibles sur rendez-vous.</p>
+			<p>Ils vous accompagnent dans vos formalités quotidiennes (certificat d'immatriculation, demande de retraite, inscription/actuallisation France Travail, impôts, CAF, CPAM...).</p>
+			<p class="custom-column d-flex align">
+				<span>Vous n'avez pas accès à l'outil informatique:</span>
+				<span>un ordinateur est disponible à l'accueil du centre social pour votre utilisation</span>
+			</p>
+			<hr/>
+			<p class="custom-column d-flex align text-center">
+				<span>Les Horaires d'accueil France Services</span>
+				<span>Lundi: 10h00 - 12h00 / 13h30 - 18h00</span>
+				<span>Mardi: 13h30 - 17h00</span>
+				<span>Mercredi: 9h00 - 12h00 / 13h30 - 18h30</span>
+				<span>Jeudi: 13h30 - 18h00</span>
+				<span>Vendredi: 10h00 - 12h00</span>
+			</p>
+			<hr/>
+			<span class="d-flex align">Nos partenaires France Services</span>
+			<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-4">
+				<a class="d-flex align" href="https://ants.gouv.fr/">
+					<img class="logo-france-services" src="/images/logo/Logo_France_Titres.png"/>
+				</a>
+				<a class="d-flex align" href="https://caf.fr/">
+					<img class="logo-france-services" src="/images/logo/logo-CAF.png"/>
+				</a>
+				<a class="d-flex align" href="https://www.lassuranceretraite.fr/portail-info/home.html">
+					<img class="logo-france-services" src="/images/logo/Logo_Assurance_Retraite.png"/>
+				</a>
+				<a class="d-flex align" href="https://www.impots.gouv.fr/accueil">
+					<img class="logo-france-services" src="/images/logo/logo_finances_publiques.png"/>
+				</a>
+				<a class="d-flex align" href="https://www.laposte.fr/">
+					<img class="logo-france-services" src="/images/logo/La_Poste_2022.svg"/>
+				</a>
+				<a class="d-flex align" href="https://lannuaire.service-public.fr/navigation/permanence_juridique">
+					<img class="logo-france-services" src="/images/logo/Logo_Point_Justice.png"/>
+				</a>
+				<a class="d-flex align" href="https://www.ameli.fr/assure">
+					<img class="logo-france-services" src="/images/logo/Logo_CPAM72.png"/>
+				</a>
+				<a class="d-flex align" href="https://france-renov.gouv.fr/">
+					<img class="logo-france-services" src="/images/logo/Logo_France_Renov.png"/>
+				</a>
+				<a class="d-flex align" href="https://chequeenergie.gouv.fr/">
+					<img class="logo-france-services" src="/images/logo/Logo_Chèque_Energie.png"/>
+				</a>
+				<a class="d-flex align" href="https://www.francetravail.fr/accueil/">
+					<img class="logo-france-services" src="/images/logo/France-travail-2023.svg"/>
+				</a>
+				<a class="d-flex align" href="https://www.msa.fr/lfp">
+					<img class="logo-france-services" src="/images/logo/logo-Mutualite.png"/>
+				</a>
+				<a class="d-flex align" href="https://www.urssaf.fr/accueil.html">
+					<img class="logo-france-services" src="/images/logo/Logo_URSSAF.png">
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="red-color custom-column">
+		<span class="d-flex align">Les permanances de nos partenaires</span>
+		<div class="flex">
+			<div class="white-color flex col-12 col-md-2 col-lg-2 mb-3">
+				<img class="logo-france-services" src="/images/logo/LogoCDAD.jpg"/>
+			</div>
+			<div class="custom-column d-flex justify-content-center col-12 col-md-10 col-lg-10 mb-3 text-france-services">
+				<span>Le conciliateur de justice: conflits de voisinage, litiges à la consommation ou entre propriétaires et locataires...</span>
+				<span>Permanance sur rendez-vous une fois par mois dans nos locaux.</span>
+			</div>
+		</div>
+		<div class="flex">
+			<div class="white-color col-12 col-md-2 col-lg-2 mb-3">
+				<img class="logo-france-services" src="/images/logo/logo_finances_publiques.png"/>
+			</div>
+			<div class="custom-column d-flex justify-content-center col-12 col-md-10 col-lg-10 mb-3 text-france-services">
+				<span>Les impôts: aide à la déclaration et à la réception des avis d'imposition avec un conseiller mis à disposition par la Direction Générale des Finances Publiques.</span>
+				<span>Permanance de proximité au sein de notre structure.</span>
+			</div>
+		</div>
+		<div class="flex">
+			<div class="white-color col-12 col-md-2 col-lg-2 mb-3">
+				<img class="logo-france-services" src="/images/logo/logo-Sarthe.png"/>
+			</div>
+			<div class="custom-column d-flex justify-content-center col-12 col-md-10 col-lg-10 mb-3 text-france-services">
+				<span>L'Assistante Sociale: la professionnelle de secteur du Conseil départemental peut vous recevoir au CAS JCL.</span>
+				<span>Pour prendre rendez-vous, contactez le 02 43 74 11 10.</span>
+			</div>
+		</div>
+	</div>
+{% endblock %}

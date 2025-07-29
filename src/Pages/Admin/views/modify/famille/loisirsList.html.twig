@@ -1,0 +1,40 @@
+{% block body %}
+	<title>
+		{% block title %}Espace Administrateur - Liste Posts Atelier Loisirs Créatifs{% endblock %}
+	</title>
+	<div class="flex align">
+		<button class="add">
+			<a class="clean-text" href="/admin/add">Ajouter</a>
+		</button>
+		<button class="modify">
+			<a class="clean-text" href="/admin/modify/list">Modifier</a>
+		</button>
+		<button class="delete">
+			<a class="clean-text" href="/admin/modify/list">Supprimer</a>
+		</button>
+	</div>
+
+	{% for post in posts %}
+		{% if post_page == 'alc' %}
+			<div class="post-item">
+				<div class="custom-column align">
+					<p>{{ post.name }}</p>
+					<img class="admin-list-img" src="/uploads/images/{{ post.image }}">
+					<p class="list-desc">{{ post.description }}</p>
+				</div>
+				<div class="post-actions">
+					<form method="post" class="align" action="{{ url('modify/modify', { id: post.id }) }}">
+						<button type="submit" class="btn btn-primary">Modifier</button>
+					</form>
+
+					<form method="post" action="{{ url('delete', { id: post.id }) }}" onsubmit="return confirm('Êtes-vous sûr de supprimer ce post ?');">
+						<button type="submit" class="btn btn-danger">Supprimer</button>
+					</form>
+				</div>
+			</div>
+	    {% else %}
+		    <p>Aucun post trouvé</p>
+	    {% endif %}
+    {% endfor %}
+
+{% endblock %}

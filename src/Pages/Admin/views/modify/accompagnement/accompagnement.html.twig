@@ -1,0 +1,40 @@
+{% block body %}
+	<title>
+		{% block title %}Espace Administrateur - Modification Accompagnement{% endblock %}
+	</title>
+
+	<div class="flex align">
+		<button class="add">
+			<a class="clean-text" href="/admin/add">Ajouter</a>
+		</button>
+		<button class="modify">
+			<a class="clean-text" href="/admin/modify/list">Modifier</a>
+		</button>
+		<button class="delete">
+			<a class="clean-text" href="/admin/modify/list">Supprimer</a>
+		</button>
+	</div>
+	<div class="modify-list">
+		<div class="flex align">
+			<button class="modify">
+				<a class="clean-text" href="/admin/modify/franceservices">France Services</a>
+			</button>
+			<button class="modify">
+				<a class="clean-text" href="/admin/modify/emploi">Emploi</a>
+			</button>
+		</div>
+		<div class="flex align">
+			<button class="modify">
+				<a class="clean-text" href="/admin/modify/cyberbase">Cyber Base</a>
+			</button>
+            <button>
+                <a class="clean-text" href="/admin/modify/services">Services Dépatementaux</a>
+            </button>
+		</div>
+	</div>
+
+	{% block importmap %}
+		{{ importmap('app') }}
+		{% block stylesheets %}{% endblock %}
+	{% endblock %}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% block body %}
+	<title>
+		{% block title %}Espace Administrateur - Liste Membres{% endblock %}
+	</title>
+	<div class="flex align">
+		<button class="add">
+			<a class="clean-text" href="/admin/add">Ajouter</a>
+		</button>
+		<button class="modify">
+			<a class="clean-text" href="/admin/modify/list">Modifier</a>
+		</button>
+		<button class="delete">
+			<a class="clean-text" href="/admin/modify/list">Supprimer</a>
+		</button>
+	</div>
+
+	{% if post_page == 'membres' %}
+		{% for member in members %}
+			<div class="post-item">
+				<div class="custom-column align">
+                    <p>{{ member.gradeLabel }}</p>
+					<p>{{ member.branchLabel }}</p>
+					<p>{{ member.name }}</p>
+					<p>{{ member.job }}</p>
+				</div>
+				<div class="post-actions">
+					<form method="post" class="align" action="{{ url('membermodify', { id: member.id }) }}">
+						<button type="submit" class="btn btn-primary">Modifier</button>
+					</form>
+					<form method="post" action="{{ url('memberdelete', { id: member.id }) }}" onsubmit="return confirm('Êtes-vous sûr de supprimer ce post ?');">
+						<button type="submit" class="btn btn-danger">Supprimer</button>
+					</form>
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+	
+	{% block importmap %}
+		{{ importmap('app') }}
+		{% block stylesheets %}{% endblock %}
+	{% endblock %}
+{% endblock %}

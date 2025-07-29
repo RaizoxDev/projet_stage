@@ -1,0 +1,95 @@
+<div class="container-fluid white-color blue-outline">
+	<div class="row flex">
+		<div class="no-margins">
+			<span class="blue-color title-test">Membres de l'Association</span>
+		</div>
+		<div class="custom-column members col-12 col-md-6 col-lg-6 mb-3">
+			<div class="custom-column yellow-color d-flex">
+				<span class="members-title">Pôle Pilotage</span>
+				<span>Anthony DERRE, directeur</span>
+				<span>Conseil d'Administration, bureau</span>
+			</div>
+		</div>
+		<div class="custom-column members col-12 col-md-6 col-lg-6 mb-3">
+			<div class="custom-column yellow-color d-flex">
+				<span class="members-title">Pôle Logistique et Administratif</span>
+				<span>Patricia Heinze, coordinatrice RH/Comptabilité</span>
+			</div>
+			<div class="custom-column">
+				{% for member in members %}
+					{% if member.branch == 'pla' %}
+						<p><span class="members-name">{{ member.name }}</span>, {{ member.job }}</p>
+					{% endif %}
+				{% endfor %}
+            </div>
+		</div>
+	</div>
+	<div class="row flex">
+		<div class="custom-column members col-12 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
+			<div class="custom-column yellow-color d-flex">
+				<span class="members-title">Pôle Accompagnement, Information et Orientation des Habitants</span>
+				<span>Julien Valienne, coordinateur</span>
+			</div>
+			<div class="custom-column">
+				{% for member in members %}
+					{% if member.branch == 'paio' %}
+						<p><span class="members-name">{{ member.name }}</span>, {{ member.job }}</p>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<div class="custom-column members col-12 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
+			<div class="custom-column yellow-color">
+				<span class="members-title">Pôle Projets d'Habitants</span>
+			</div>
+			<div class="custom-column">
+				{% for member in members %}
+					{% if member.branch == 'pph' %}
+						<p><span class="members-name">{{ member.name }},</span></p>
+					{% endif %}
+				{% endfor %}
+				<span>Facilitateurs de projets d'habitants</span>
+			</div>
+		</div>
+	</div>
+	<div class="row flex">
+		<div class="custom-column members col-12 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
+			<div class="custom-column yellow-color">
+				<span class="members-title">Pôle Actions Socioéducatives Enfance</span>
+				<span>Soizic le Cloirec, coordinatrice enfance</span>
+			</div>
+			<div class="custom-column">
+				{% for member in members %}
+					{% if member.branch == 'pase' %}
+						<p><span class="members-name">{{ member.name }}</span>, {{ member.job }}</p>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<div class="custom-column members col-12 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
+			<div class="custom-column yellow-color">
+				<span class="members-title">Pôle Actions Socioéducatives Jeunesse</span>
+                <span>Laurent Rezé, coordinateur jeunesse</span>
+			</div>
+            <div class="custom-column">
+				{% for member in members %}
+					{% if member.branch == 'pasj' %}
+						<p><span class="members-name">{{ member.name }}</span>, {{ member.job }}</p>
+					{% endif %}
+				{% endfor %}
+            </div>
+            <div class="custom-column members-special-margin yellow-color">
+                <span class="members-title">Pôle Familles, Parentalité et Animation Vie Sociale Locale</span>
+                <span>Laurent Bargna, coordinateur et référent familles</span>
+            </div>
+            <div class="custom-column">
+				{% for member in members %}
+					{% if member.branch == 'pfpa' %}
+						<p><span class="members-name">{{ member.name }}</span>, {{ member.job }}</p>
+					{% endif %}
+				{% endfor %}
+            </div>
+		</div>
+	</div> 
+</div>
+

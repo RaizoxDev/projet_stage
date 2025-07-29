@@ -1,0 +1,65 @@
+<div class="container-fluid white-color blue-outline">
+	<div class="row flex">
+		<div class="no-margins">
+			<span class="blue-color title-test">Bénévoles de l'Association</span>
+		</div>
+		<div class="custom-column col-12 col-md-4 col-lg-4 mb-3 d-flex align">
+			<span class="members-title">Animation Loisirs Créatifs</span>
+			{% for member in members %}
+				{% if member.branch == 'alc' %}
+					<span>{{ member.name }}</span>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<div class="custom-column col-12 col-md-4 col-lg-4 mb-3 d-flex align">
+			<span class="members-title">Animation Radio</span>
+			{% for member in members %}
+				{% if member.branch == 'ar' %}
+					<span>{{ member.name }}</span>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<div class="custom-column col-12 col-md-4 col-lg-4 mb-3 d-flex align">
+			<span class="members-title">Animation Cyber-Base</span>
+			{% for member in members %}
+				{% if member.branch == 'acb' %}
+					<span>{{ member.name }}</span>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid white-color blue-outline">
+	<div class="row flex">
+		<div class="no-margins">
+			<span class="blue-color title-test">Cercles Sociocratiques</span>
+		</div>
+		<div class="custom-column members col-12 cold-md-6 cold-lg-6 mb-3 d-flex align">
+			<span class="members-title">Cercle Finances:</span>
+			<span>Élabore le budget prévisionnel de la structure,</span>
+			<span>Assure le suivi du budget réalisé de la structure,</span>
+			<span>Réfléchit aux problématiques de financements de la structure (tarification des activités, subventions, développement…).</span>
+			<span class="italic">4 à 5 rencontres par an.</span>
+		</div>
+		<div class="custom-column members col-12 cold-md-6 cold-lg-6 mb-3 d-flex align">
+			<span class="members-title">Cercle Ressources Humaines:</span>
+			<span>Recrute du personnel,</span>
+			<span>Assure l’évaluation du personnel,</span>
+			<span>Prépare les évolutions éventuelles des fiches de postes, de classification de l’emploi.</span>
+			<span class="italic">2 à 3 rencontres par an.</span>
+		</div>
+	</div>
+	<div class="row flex">
+		<div class="custom-column members col-12 cold-md-6 cold-lg-6 mb-3 d-flex align">
+			<span class="members-title">Cercle Communication:</span>
+			<span>Travail sur l’évolution ou la création des supports de communication du Centre d’Animation Sociale,</span>
+		</div>
+		<div class="custom-column members col-12 cold-md-6 cold-lg-6 mb-3 d-flex align">
+			<span class="members-title">Cercle Assemblée Générale:</span>
+			<span>Travaille chaque année à la mise en place de l’assemblée générale,</span>
+			<span>Elle peut intégrer des adhérents et des salariés du Centre d’Animation Sociale (commission ouverte).</span>
+			<span class="italic">2 réunions par an.</span>
+		</div>
+	</div>
+</div>

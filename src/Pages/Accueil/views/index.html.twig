@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<title>{% block title %}Centre d'Animation Sociale - Jean-Claude Laude{% endblock %}</title>
+
+<div class="yellow-color blue-outline">
+<span class="title-test">Présentation</span>
+<br/>
+<span>Depuis sa création en 1988, le Centre d’Animation Sociale a pour vocation d’accueillir tous les habitants sans distinction d’âge, d’origine sociale ou culturelle.
+Respect, tolérance, responsabilité, citoyenneté, amitié, démocratie, dignité humaine et solidarité constituent les valeurs sur lesquelles il développe ses projets.
+Le Centre d’Animation Sociale propose des espaces de rencontres et d’activités. Il développe des projets éducatifs en direction de l’enfance, de la jeunesse, des adultes et des familles.
+Il favorise la participation des habitants qu’il considère comme les premiers acteurs de la vie sociale de la commune.
+Il contribue à travers ses actions à la lutte contre toutes les formes d’exclusions.
+Le Centre d’Animation Sociale est un lieu ouvert aux partenaires et à l’accueil de diverses associations.</span>
+</div>
+
+{% include "@accueil/slider.html.twig" with { posts: posts } %}
+{% include "@accueil/agenda.html.twig" %}
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<title>{% block title %}Membres de l'Association{% endblock %}</title>
+
+{% include "@membres/admins.html.twig" %}
+{% include "@membres/membres.html.twig" %}
+{% include "@membres/benevoles.html.twig" %}
+
+{% endblock %}
