@@ -72,7 +72,7 @@
 			function updateFormFields(page) {
 				dynamicFields.innerHTML = '<p>Chargement...</p>';
 				
-				fetch(`/form/members?page=${page}`)
+				fetch(/form/data?type=${entityType}&id=${entityId})
 					.then(response => {
 						if (!response.ok) {
 							throw new Error('Network response was not ok');
