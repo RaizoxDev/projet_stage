@@ -38,6 +38,9 @@
 
 	</div>
 	<script>
+		const entityType = {{ entityType|json_encode|raw }};
+		const entityId = {{ entityId|json_encode|raw }};
+
 		document.addEventListener('DOMContentLoaded', function() {
     		const pageSelect = document.querySelector('#posts_page');
 			if (!pageSelect) return;
@@ -54,14 +57,9 @@
 
 			function updateFormFields(page) {
 				dynamicFields.innerHTML = '<p>Chargement...</p>';
-				
-				fetch(`/form/data?type={{ entityType }}&id={{ entityId }}`)
-					.then(response => {
-						if (!response.ok) {
-							throw new Error('Network response was not ok');
-						}
-						return response.json();
-					})
+
+				fetch(`/form/data?type=${entityType}&id=${entityId}`)
+					.then(response => response.json())
 					.then(data => {
 						dynamicFields.innerHTML = data.html;
 						setupRoleBranchLogic();

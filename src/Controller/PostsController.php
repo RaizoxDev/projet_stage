@@ -19,6 +19,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PostsController extends AbstractController
 {
+    #[Route('/form/data', name: 'form_data')]
+    public function formData(Request $request): JsonResponse
+    {
+        $type = $request->query->get('type');
+        $id = $request->query->get('id');
+
+        $html = $this->renderView('@admin/forms/testform.html.twig', [
+            'entityType' => $type,
+            'entityId' => $id,
+        ]);
+
+        return new JsonResponse(['html' => $html]);
+    }
+
     private function processFormData(FormInterface $form, Posts $post, EntityManagerInterface $em): void
     {
         if ($post->getPage() === 'membres' && $form->has('membre')) {
@@ -79,13 +93,13 @@ class PostsController extends AbstractController
     }
 
     public function modify(int $id, Request $request, EntityManagerInterface $em, PostsRepository $postRepo, MembersRepository $memberRepo): Response
-    {
-        $path = $request->getPathInfo();
-        $isMember = str_contains($path, '/admin/modify/membres/');
-        
+    { 
         $routeName = $request->attributes->get('_route');
         $memberRoutes = ['membermodify'];
         $postRoutes = ['postmodify'];
+        
+        $path = $request->getPathInfo();
+        $isMember = in_array($routeName, $memberRoutes);
 
         if (in_array($routeName, $memberRoutes)) {
             $entity = $memberRepo->find($id);
@@ -121,6 +135,7 @@ class PostsController extends AbstractController
             return $this->redirectToRoute('modifylist');
         }
 
+        dd('CECI EST MON CONTROLLER');
         return $this->render('@admin/forms/form.html.twig', [
             'form' => $form->createView(),
             'entity' => $entity,
@@ -144,27 +159,23 @@ class PostsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($form->isSubmitted() && $form->isValid()) {
-                $post = $form->getData();
+            $post = $form->getData();
 
-                if ($post->getPage() === 'membres' && $form->has('membre')) {
-                    $member = $form->get('membre')->getData();
+            if ($post->getPage() === 'membres' && $form->has('membre')) {
+                $member = $form->get('membre')->getData();
+                $this->fillMissingPostFields($post, $member->getName());
 
-                    $this->fillMissingPostFields($post, $member->getName());
-
-                    if ($member) {
-                        $em->persist($member);
-
-                        $post->setMembre($member);
-                    }
-
-                    $em->persist($post);
-                } else {
-                    $em->persist($post);
+                if ($member) {
+                    $em->persist($member);
+                    $post->setMembre($member);
                 }
 
-                $em->flush();
+                $em->persist($post);
+            } else {
+                $em->persist($post);
             }
+
+            $em->flush();
         }
 
         $latestPosts = $postRepo->findLatest(6);
@@ -173,6 +184,8 @@ class PostsController extends AbstractController
             'form' => $form->createView(),
             'posts' => $latestPosts,
             'is_edit' => false,
+            'entityId' => $post->getId() ?? 0,
+            'entityType' => 'post'
         ]);
     }
 
