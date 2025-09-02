@@ -19,16 +19,39 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PostsController extends AbstractController
 {
-    #[Route('/form/data', name: 'form_data')]
-    public function formData(Request $request): JsonResponse
+    #[Route('/admin/form/data', name: 'admin_form_data')]
+    public function formData(Request $request, PostsRepository $postRepo, MembersRepository $memberRepo): JsonResponse
     {
         $type = $request->query->get('type');
-        $id = $request->query->get('id');
+        $id   = $request->query->get('id');
 
-        $html = $this->renderView('@admin/forms/testform.html.twig', [
-            'entityType' => $type,
-            'entityId' => $id,
-        ]);
+        $isEdit = !empty($id) && $id > 0;
+
+        if ($type === 'post') {
+            $entity = $isEdit ? $postRepo->find($id) : new Posts();
+            $formType = PostsType::class;
+        } elseif ($type === 'member') {
+            $entity = $isEdit ? $memberRepo->find($id) : null;
+            $formType = MembersType::class;
+        } else {
+            return new JsonResponse(['html' => '<p>Type invalide</p>'], 400);
+        }
+
+        if ($isEdit && !$entity) {
+            return new JsonResponse(['html' => '<p>Entité introuvable</p>'], 404);
+        }
+
+        $form = $this->createForm($formType, $entity);
+
+        if ($form->has('membre')) {
+            $html = $this->renderView('@admin/forms/membersform.html.twig', [
+                'form' => $form->get('membre')->createView(),
+            ]);
+        } else {
+            $html = $this->renderView('@admin/forms/regularform.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
 
         return new JsonResponse(['html' => $html]);
     }
@@ -51,15 +74,19 @@ class PostsController extends AbstractController
 
     private function handleImageUpload(?UploadedFile $file, object $entity, string $setterMethod): string
     {
-        $filename = $file 
-            ? uniqid().'.'.$file->guessExtension()
-            : 'PlaceHolder.png';
-        
-        if ($file) {
+        $filename = 'PlaceHolder.png';
+
+        if ($file instanceof UploadedFile) {
+            $filename = uniqid().'.'.$file->guessExtension();
             $file->move($this->getParameter('images_directory'), $filename);
         }
-        
-        $entity->{$setterMethod}($filename);
+
+        if (method_exists($entity, $setterMethod)) {
+            $entity->{$setterMethod}($filename);
+        } else {
+            throw new \LogicException("Méthode $setterMethod inexistante dans ".get_class($entity));
+        }
+
         return $filename;
     }
 
@@ -135,7 +162,6 @@ class PostsController extends AbstractController
             return $this->redirectToRoute('modifylist');
         }
 
-        dd('CECI EST MON CONTROLLER');
         return $this->render('@admin/forms/form.html.twig', [
             'form' => $form->createView(),
             'entity' => $entity,

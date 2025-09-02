@@ -36,37 +36,158 @@
 
 		<button type="submit">{{ is_edit ? 'Modifier' : 'Ajouter' }}</button>
 
+		{{ form_end(form) }}
 	</div>
+
 	<script>
-		const entityType = {{ entityType|json_encode|raw }};
-		const entityId = {{ entityId|json_encode|raw }};
-
 		document.addEventListener('DOMContentLoaded', function() {
-    		const pageSelect = document.querySelector('#posts_page');
-			if (!pageSelect) return;
+			const pageSelect = document.querySelector('#posts_page');
+			const dynamicFields = document.getElementById('dynamic-fields');
+			const entityType = {{ entityType|json_encode|raw }};
+			const entityId = {{ entityId|json_encode|raw }};
 
-    		const dynamicFields = document.getElementById('dynamic-fields');
+			if (pageSelect) {
+				pageSelect.addEventListener('change', function() {
+					updateFormFields(this.value);
+				});
 
-			if (pageSelect.value) {
-				updateFormFields(pageSelect.value);
+				if (pageSelect.value) {
+					updateFormFields(pageSelect.value);
+				}
 			}
 
-			pageSelect.addEventListener('change', function() {
-				updateFormFields(this.value);
-			});
-
 			function updateFormFields(page) {
-				dynamicFields.innerHTML = '<p>Chargement...</p>';
+				if (!page) {
+					dynamicFields.innerHTML = '<p class="loading">Sélectionnez une page pour charger le formulaire approprié</p>';
+					return;
+				}
 
-				fetch(`/form/data?type=${entityType}&id=${entityId}`)
-					.then(response => response.json())
+				dynamicFields.innerHTML = '<p class="loading">Chargement...</p>';
+
+				fetch(`/form/data?page=${encodeURIComponent(page)}&type=${entityType}&id=${entityId}`)
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok');
+						}
+						return response.json();
+					})
 					.then(data => {
-						dynamicFields.innerHTML = data.html;
-						setupRoleBranchLogic();
+						if (data.html && data.html.trim() !== '') {
+							dynamicFields.innerHTML = data.html;
+							setupRoleBranchLogic();
+						} else {
+							if (page === 'membres') {
+								dynamicFields.innerHTML = `
+									<div class="form-row">
+										<label for="membre_grade">Grade</label>
+										<select id="membre_grade" name="membre[grade]">
+											<option value="">Choisir un grade</option>
+											<option value="admin">Administrateur</option>
+											<option value="member">Salarié</option>
+											<option value="benevol">Bénévole</option>
+										</select>
+									</div>
+									<div class="form-row">
+										<label for="membre_branch">Branche d'activité</label>
+										<select id="membre_branch" name="membre[branch]">
+											<option value="">Choisir une branche</option>
+											<option value="mb">Membre du Bureau</option>
+											<option value="ca">Autre Membre du CA</option>
+											<option value="pp">Pôle Pilotage</option>
+											<option value="pla">Pôle Logistique et Administratif</option>
+											<option value="paio">Pôle Accompagnement, Information et Orientation des Habitants</option>
+											<option value="pph">Pôle Projets d'Habitants</option>
+											<option value="pase">Pôle Actions Socioéducatives Enfance</option>
+											<option value="pasj">Pôle Actions Socioéducatives Jeunesse</option>
+											<option value="pfpa">Pôle Familes, Parentalité et Animation Vie Sociale Locale</option>
+											<option value="alc">Atelier Loisirs Créatifs</option>
+											<option value="ar">Atelier Radio</option>
+											<option value="acb">Atelier Cyber Base</option>
+										</select>
+									</div>
+									<div class="form-row">
+										<label for="membre_name">Nom</label>
+										<input type="text" id="membre_name" name="membre[name]" required>
+									</div>
+									<div class="form-row">
+										<label for="membre_job">Fonction</label>
+										<input type="text" id="membre_job" name="membre[job]" required>
+									</div>
+								`;
+							} else {
+								dynamicFields.innerHTML = `
+									<div class="form-row">
+										<label for="posts_name">Titre</label>
+										<input type="text" id="posts_name" name="posts[name]" required>
+									</div>
+									<div class="form-row">
+										<label for="posts_description">Description</label>
+										<textarea id="posts_description" name="posts[description]" rows="4" required></textarea>
+									</div>
+									<div class="form-row">
+										<label for="posts_image">Image</label>
+										<input type="file" id="posts_image" name="posts[image]">
+									</div>
+								`;
+							}
+						}
 					})
 					.catch(error => {
 						console.error('Fetch error:', error);
-						dynamicFields.innerHTML = `<p>Erreur: ${error.message}</p>`;
+						if (page === 'membres') {
+							dynamicFields.innerHTML = `
+								<div class="form-row">
+										<label for="membre_grade">Grade</label>
+										<select id="membre_grade" name="membre[grade]">
+											<option value="">Choisir un grade</option>
+											<option value="admin">Administrateur</option>
+											<option value="member">Salarié</option>
+											<option value="benevol">Bénévole</option>
+										</select>
+									</div>
+									<div class="form-row">
+										<label for="membre_branch">Branche d'activité</label>
+										<select id="membre_branch" name="membre[branch]">
+											<option value="">Choisir une branche</option>
+											<option value="mb">Membre du Bureau</option>
+											<option value="ca">Autre Membre du CA</option>
+											<option value="pp">Pôle Pilotage</option>
+											<option value="pla">Pôle Logistique et Administratif</option>
+											<option value="paio">Pôle Accompagnement, Information et Orientation des Habitants</option>
+											<option value="pph">Pôle Projets d'Habitants</option>
+											<option value="pase">Pôle Actions Socioéducatives Enfance</option>
+											<option value="pasj">Pôle Actions Socioéducatives Jeunesse</option>
+											<option value="pfpa">Pôle Familes, Parentalité et Animation Vie Sociale Locale</option>
+											<option value="alc">Atelier Loisirs Créatifs</option>
+											<option value="ar">Atelier Radio</option>
+											<option value="acb">Atelier Cyber Base</option>
+										</select>
+									</div>
+									<div class="form-row">
+										<label for="membre_name">Nom</label>
+										<input type="text" id="membre_name" name="membre[name]" required>
+									</div>
+									<div class="form-row">
+										<label for="membre_job">Fonction</label>
+										<input type="text" id="membre_job" name="membre[job]" required>
+									</div>
+							`;
+						} else {
+							dynamicFields.innerHTML = `
+								<div class="form-row">
+									<label for="posts_name">Titre</label>
+									<input type="text" id="posts_name" name="posts[name]" required>
+								</div>
+								<div class="form-row">
+									<label for="posts_description">Description</label>
+									<textarea id="posts_description" name="posts[description]" rows="4" required></textarea>
+								</div>
+								<div class="form-row">
+									<label for="posts_image">Image</label>
+									<input type="file" id="posts_image" name="posts[image]">
+								</div>
+							`;
+						}
 					});
 			}
 
@@ -98,6 +219,5 @@
 	</script>
 	{% block importmap %}
 		{{ importmap('app') }}
-		{% block stylesheets %}{% endblock %}
 	{% endblock %}
 {% endblock %}

@@ -24,7 +24,7 @@ class Posts
     #[ORM\Column(name: "description", type: 'text')]
     private ?string $description = null;
 
-    #[ORM\Column(name: "image", type: 'string')]
+    #[ORM\Column(name: "image", type: 'string', nullable: false)]
     private ?string $image = null;
 
     #[ORM\Column(name: "download", type: 'string', nullable: true)]
@@ -70,6 +70,15 @@ class Posts
         return $this;
     }
 
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function generateSlug(): void
+    {
+        if (empty($this->slug)) {
+            $this->setSlug();
+        }
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -82,14 +91,18 @@ class Posts
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage(): string
     {
         return $this->image;
     }
 
     public function setImage(string $image): static
     {
-        $this->image = $image;
+        if (empty($image)) {
+            $this->image = 'PlaceHolder.png';
+        } else {
+            $this->image = $image;
+        }
 
         return $this;
     }
