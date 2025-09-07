@@ -13,9 +13,6 @@
                         </div>
                         
                         <p>{{ post.description|slice(0, 150) ~ '...' }}</p>
-                        {% if post.download %}
-                            <a href="{{ post.download }}" class="btn" target="_blank">Télécharger</a>
-                        {% endif %}
                     </div>
                 </div>
             {% endif %}
