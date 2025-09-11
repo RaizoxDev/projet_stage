@@ -11,6 +11,7 @@ final class UserMigration extends AbstractMigration
         ->addColumn('email', 'string', ['null' => false])
         ->addIndex(['email'], ['unique' => true])
         ->addColumn('password', 'string', ['null' => false])
+        ->addForeignKey()
         ->create();
     }
 }
